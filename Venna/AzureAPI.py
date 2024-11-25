@@ -104,15 +104,3 @@ def Chat(conversation_history):
     )
 
     return response.choices[0].message.content
-
-# Test cases to demonstrate behavior
-test_cases = [
-    [{"role": "user", "content": "How can I book a flight to Bali?"}],
-    [{"role": "user", "content": "What is the weather like in Paris?"}],
-    [{"role": "user", "content": "Can you help me find a hotel in Jakarta?"}],
-    [{"role": "user", "content": "Tell me a joke"}]
-]
-
-for case in test_cases:
-    print("\nQuery:", case[0]['content'])
-    print("Response:", Chat(case))
