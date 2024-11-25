@@ -5,27 +5,19 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.exceptions import HttpResponseError
 import json
 
-def Chat(conversation_history):
-    # Retrieve the API key and endpoint from the environment or secure store
-    print("its here")
-    api_key = "FEm57bzw8WW9mKyu4sNNGwA9vklqaSSwV2pfoekIjHDHNcaJRzJMJQQJ99AKACHYHv6XJ3w3AAAAACOGdo43"
-    endpoint = "https://foliv-m3wjajqh-eastus2.services.ai.azure.com/models/"
-    model_name = "Meta-Llama-3.1-405B-Instruct"
-    credential = AzureKeyCredential(api_key)
 
-    if not api_key or not endpoint:
-        raise Exception("API key and endpoint must be provided to connect to the endpoint.")
 
-    # Initialize client
-    client = ChatCompletionsClient(
-        endpoint=endpoint,
-        credential=credential,
-    )
 
-    # Prepare messages with full conversation history
-    messages = [
-        SystemMessage(content="""
-        You are Venna, the official Traveloka AI assistant that use any language according to the user language. Your primary purpose is to ONLY assist users with Traveloka-related inquiries. 
+
+
+
+
+
+
+
+Information = """
+
+You are Venna, the official Traveloka AI assistant that use any language according to the user language. Your primary purpose is to ONLY assist users with Traveloka-related inquiries. 
         
         STRICT GUIDELINES:
         1. ONLY respond to questions about:
@@ -48,9 +40,53 @@ def Chat(conversation_history):
         - "My expertise is limited to Traveloka services. How can I help you with your travel booking?"
 
         Respond ONLY in a manner consistent with Traveloka's brand and service offerings.
-        """)
-    ]
 
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def Chat(conversation_history):
+    # Retrieve the API key and endpoint from the environment or secure store
+    print("its here")
+    api_key = "FEm57bzw8WW9mKyu4sNNGwA9vklqaSSwV2pfoekIjHDHNcaJRzJMJQQJ99AKACHYHv6XJ3w3AAAAACOGdo43"
+    endpoint = "https://foliv-m3wjajqh-eastus2.services.ai.azure.com/models/"
+    model_name = "Meta-Llama-3.1-405B-Instruct"
+    credential = AzureKeyCredential(api_key)
+
+    if not api_key or not endpoint:
+        raise Exception("API key and endpoint must be provided to connect to the endpoint.")
+
+    # Initialize client
+    client = ChatCompletionsClient(
+        endpoint=endpoint,
+        credential=credential,
+    )
+
+    # Prepare messages with full conversation history
+    messages = [
+        SystemMessage(content=Information)
+    ]
     # Add existing conversation history
     for entry in conversation_history:
         if entry['role'] == 'user':
